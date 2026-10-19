@@ -18,9 +18,11 @@ Reads a long answer about speaker products, extracts each factual claim sentence
 
 ## Setup
 ```bash
-python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
-cp .env.example .env     # paste your FREE Gemini key (https://aistudio.google.com/apikey) into .env
-python scripts/list_models.py   # pick a flash / flash-lite model free for your project -> GEMINI_MODEL in .env
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+Copy-Item .env.example .env     # paste your Gemini key into .env (never commit it)
+python scripts/list_models.py   # pick a flash / flash-lite model -> GEMINI_MODEL in .env
 ```
 - Free tier, no billing. Note Google may use free-tier inputs for model improvement (this dataset is fictional).
 - Do **not** use `gemini-2.5-*` (shut down 16 Oct 2026). Keep the **same model** for all four runs.
