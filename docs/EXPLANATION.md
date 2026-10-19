@@ -99,7 +99,7 @@ The recorded command was `pytest -q -rs`.
 - The saved test output is available in `runs/test_output.txt`.
 - Fake-provider tests exercise controlled scenarios, but they do not replace the four required live model runs.
 
-**Live model/tool exchange evidence:** The saved run JSON files do not contain the actual provider messages; their `trace_ref` fields are null. A genuine, sanitized exchange from a separate v1 call for answer A01 should be provided in `docs/sample_exchange.md`, with its capture method in `scripts/capture_exchange.py`. This separate capture must not be represented as part of the four saved runs, and its artifacts must be included in the repository before submission.
+**Live model/tool exchange evidence:** The saved run JSON files do not contain the actual provider messages; their `trace_ref` fields are null. A separate live v1 call for answer A01 is documented in `docs/sample_exchange.md`, and `scripts/capture_exchange.py` records how the exchange is captured from the real provider and agent loop. This sample is separate from the four scored runs, so its output may differ because the model uses its default temperature. The exchange file is included as evidence of tool use; it must not be presented as one of the four evaluation artifacts.
 
 ## Unfinished Work and Limitations
 
