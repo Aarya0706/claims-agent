@@ -35,7 +35,7 @@ answers with 0 errors (v1: 90 accepted predictions, v2: 82); quality metrics are
 | v1 and v2 check runs (predictions, outcomes, counts; no quality scores) | `runs/v1_check.{json,md}`, `runs/v2_check.{json,md}` |
 | v1 vs v2 comparison (regressions and improvements) | `runs/comparison.md` |
 | Smoke test (3 answers, not a deliverable) | `runs/v1_development_limit3.{json,md}` |
-| Actual test output (`77 passed, 3 skipped`) | `runs/test_output.txt` |
+| Actual test output (`80 passed`, including PostgreSQL tests) | `runs/test_output.txt` |
 | One real, sanitized model/tool exchange | `docs/sample_exchange.md` |
 | Explanation, disclosure, limitations | `docs/EXPLANATION.md` |
 
@@ -116,12 +116,11 @@ Each run writes `runs/<version>_<split>.json` and `.md`. Add `--db` to also pers
 ## Tests
 
 ```powershell
-pytest -q -rs                                   # DB tests are skipped without a database
+pytest -q -rs                                   # DB tests are skipped unless TEST_DATABASE_URL is set
 ```
-Recorded result: **77 passed, 3 skipped, 1 warning** (`runs/test_output.txt`). The 3 skipped tests are the PostgreSQL
-persistence tests in `tests/test_api_db.py`; they were **not run against a real PostgreSQL** for the recorded evidence
-(`TEST_DATABASE_URL` was not set). Everything else, including the fake-provider, validation, scorer and API-validation
-tests, ran. Fake-provider tests do not replace the live runs.
+Recorded result: **80 passed, 1 warning** (`runs/test_output.txt`), run with `TEST_DATABASE_URL` pointing at a local
+PostgreSQL 16 database, so the 3 persistence tests in `tests/test_api_db.py` ran against a real database.
+Fake-provider tests do not replace the live runs.
 
 To run the PostgreSQL tests against a throwaway database:
 ```powershell
@@ -163,5 +162,4 @@ Storage uses parameterized SQL only, foreign keys, and unique constraints on `(r
 ## Limitations
 
 See `docs/EXPLANATION.md` for the full list. In short: one run per version at the default temperature (no variance
-measurement), v2 is a regression and was not iterated on, and the PostgreSQL persistence tests were not run against a
-real PostgreSQL for the recorded evidence. Langfuse, concurrency and the React front end were not built (all optional).
+measurement), v2 is a regression and was not iterated on. Langfuse, concurrency and the React front end were not built (all optional).

@@ -94,9 +94,8 @@ Both reports record revision `d8f01c7`. V2 accepted eight fewer claims than v1, 
 
 The recorded command was `pytest -q -rs`.
 
-- **Result:** 77 passed, 3 skipped and 1 warning.
-- The three skipped tests are PostgreSQL persistence tests in `tests/test_api_db.py`. They were skipped because `TEST_DATABASE_URL` was not configured.
-- I attempted to install PostgreSQL locally, but the `winget` download failed with HTTP 403. As a result, the database integration tests were not run against a real PostgreSQL instance.
+- **Result:** 80 passed and 1 warning, with no skipped tests.
+- The three PostgreSQL persistence and joined-retrieval tests in `tests/test_api_db.py` ran against a real local PostgreSQL 16 database (`TEST_DATABASE_URL` set). An earlier run without a database gave 77 passed and 3 skipped; the first `winget` install attempt failed with HTTP 403, so I installed PostgreSQL with the EDB installer instead.
 - The saved test output is available in `runs/test_output.txt`.
 - Fake-provider tests exercise controlled scenarios, but they do not replace the four required live model runs.
 
@@ -107,6 +106,5 @@ The recorded command was `pytest -q -rs`.
 - V2 regressed relative to v1, and I did not have time to investigate and iterate further.
 - I did not isolate the cause of the classification regression. Model variability may have contributed, but this was not measured.
 - Only one development run was performed per version, so there is no estimate of run-to-run variance.
-- Database persistence and joined-retrieval tests were not verified against a real PostgreSQL instance.
 - The source revision for v1 cannot be reproduced exactly from the visible Git history, and v1 was not rerun against the final commit.
 - Langfuse integration, concurrent execution and a React frontend were not implemented because they are optional in the assessment.

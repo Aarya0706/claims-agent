@@ -1,4 +1,4 @@
-﻿..................................sss................................... [ 90%]
+﻿........................................................................ [ 90%]
 ........                                                                 [100%]
 ============================== warnings summary ===============================
 .venv\Lib\site-packages\fastapi\testclient.py:1
@@ -6,8 +6,4 @@
     from starlette.testclient import TestClient as TestClient  # noqa
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-=========================== short test summary info ===========================
-SKIPPED [1] tests\test_api_db.py:98: TEST_DATABASE_URL not set
-SKIPPED [1] tests\test_api_db.py:116: TEST_DATABASE_URL not set
-SKIPPED [1] tests\test_api_db.py:127: TEST_DATABASE_URL not set
-77 passed, 3 skipped, 1 warning in 2.28s
+80 passed, 1 warning in 8.59s
